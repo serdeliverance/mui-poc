@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { TourCard } from './components/TourCard'
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
         />
       </header>
       <body>
-        <h1>Hello</h1>
+        <TourCard />
       </body>
     </div>
   )
