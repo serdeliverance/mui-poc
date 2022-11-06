@@ -1,42 +1,19 @@
-import { Container, Grid, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 import NavBar from './components/NavBar'
-import { TourCard } from './components/TourCard'
-import data from './data.json'
-import { City } from './interfaces/city'
 
-function App() {
-  const [cities, setCities] = useState<City[]>([])
+import HomePage from './pages/HomePage'
+import TourPage from './pages/TourPage'
 
-  useEffect(() => {
-    setCities(data)
-  }, [])
-
-  return (
-    <div className="App">
-      <NavBar />
-      <Container sx={{ marginY: 5 }}>
-        {cities.map((city) => (
-          <>
-            <Typography
-              variant="h4"
-              component="h2"
-              marginTop={5}
-              marginBottom={3}
-            >
-              Top {city.name} tours
-            </Typography>
-            <Grid container spacing={5}>
-              {city.tours.map((tour) => (
-                <TourCard tour={tour} key={tour.id} />
-              ))}
-            </Grid>
-          </>
-        ))}
-      </Container>
-    </div>
-  )
-}
+const App = () => (
+  <BrowserRouter>
+    <NavBar />
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/:id" element={<TourPage />} />
+    </Routes>
+  </BrowserRouter>
+)
 
 export default App
