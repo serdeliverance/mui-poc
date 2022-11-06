@@ -1,8 +1,9 @@
 import { Box, Grid, Paper, ThemeProvider, Typography } from '@mui/material'
-import React from 'react'
+import React, { FC } from 'react'
 import { AccessTime } from '@mui/icons-material'
 import { Rating } from '@mui/material'
 import { createTheme } from '@mui/material'
+import { Tour } from '../interfaces'
 
 // TODO move those module declarations to other file
 declare module '@mui/material/styles' {
@@ -47,39 +48,45 @@ const theme = createTheme({
   },
 })
 
-export const TourCard = () => (
+interface Props {
+  tour: Tour
+}
+
+export const TourCard: FC<Props> = ({ tour }) => (
   <Grid item xs={3}>
     {/* TODO move ThemeProvider to app level */}
     <ThemeProvider theme={theme}>
       <Paper elevation={3} square>
-        <img
-          src="https://images.unsplash.com/photo-1551963831-b3b1ca40c98e"
-          alt="Breakfast"
-          className="img"
-        />
+        <img src={tour.image} alt="Breakfast" className="img" />
         <Box paddingX={1}>
           <Typography variant="subtitle1" component="h2">
-            Immerse into the falls
+            {tour.name}
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <AccessTime sx={{ width: 12.5 }} />
             <Typography variant="body2" component="p" marginLeft={0.5}>
-              5 hours
+              {tour.duration} {tour.duration > 1 ? 'hours' : 'hour'}
             </Typography>
           </Box>
         </Box>
         <Box sx={{ display: 'flex', alignItems: 'center' }} marginTop={3}>
-          <Rating name="read-only" value={4.5} precision={0.5} size="small" />
+          <Rating
+            name="read-only"
+            value={tour.rating}
+            precision={0.5}
+            size="small"
+          />
           <Typography variant="body2" component="p" marginLeft={0.5}>
-            4.5
+            {tour.rating}
           </Typography>
           <Typography variant="body3" component="p" marginLeft={0.5}>
-            (355 reviews)
+            ({tour.numberOfReviews}{' '}
+            {tour.numberOfReviews > 1 ? 'reviews' : 'review'} )
           </Typography>
         </Box>
         <Box>
           <Typography variant="h6" component="h3" marginTop={0}>
-            From EUR 120
+            From EUR {tour.price}
           </Typography>
         </Box>
       </Paper>
