@@ -49,6 +49,7 @@ const theme = createTheme({
 
 export const TourCard = () => (
   <Grid item xs={3}>
+    {/* TODO move ThemeProvider to app level */}
     <ThemeProvider theme={theme}>
       <Paper elevation={3} square>
         <img
